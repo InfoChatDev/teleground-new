@@ -1,0 +1,131 @@
+# This workflow will publish an alpha release when a PR is merged into master
+name: Rust Alpha Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Build release
+        run: cargo build --release
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: alpha-${{ github.run_number }}
+          name: Alpha Release ${{ github.run_number }}
+          body: |
+            # 🚀 自动发布 Alpha 版本
+
+            |  |  |
+            |---|---|
+            | 🔗 **PR** | [${{ github.event.pull_request.html_url }}](${{ github.event.pull_request.html_url }}) |
+            | 👤 **作者** | ${{ github.event.pull_request.user.login }} |
+            | 🤝 **合并者** | ${{ github.actor }} |
+            | 📦 **下载链接** | [artifact](${{ github.server_url }}/${{ github.repository }}/releases/download/alpha-${{ github.run_number }}/release-binary) |
+
+            ## 📝 变更说明
+            ${{ github.event.pull_request.body }}
+
+            ---
+
+            <details>
+            <summary>🇩🇪 Deutsch</summary>
+
+            ### 🚀 Automatische Alpha-Version veröffentlicht
+
+            |  |  |
+            |---|---|
+            | 🔗 **PR** | [${{ github.event.pull_request.html_url }}](${{ github.event.pull_request.html_url }}) |
+            | 👤 **Autor** | ${{ github.event.pull_request.user.login }} |
+            | 🤝 **Zusammengeführt von** | ${{ github.actor }} |
+            | 📦 **Download-Link** | [artifact](${{ github.server_url }}/${{ github.repository }}/releases/download/alpha-${{ github.run_number }}/release-binary) |
+
+            #### 📝 Änderungsprotokoll
+            ${{ github.event.pull_request.body }}
+            </details>
+
+            <details>
+            <summary>🇬🇧 English</summary>
+
+            ### 🚀 Alpha Release Published Automatically
+
+            |  |  |
+            |---|---|
+            | 🔗 **PR** | [${{ github.event.pull_request.html_url }}](${{ github.event.pull_request.html_url }}) |
+            | 👤 **Author** | ${{ github.event.pull_request.user.login }} |
+            | 🤝 **Merged by** | ${{ github.actor }} |
+            | 📦 **Download Link** | [artifact](${{ github.server_url }}/${{ github.repository }}/releases/download/alpha-${{ github.run_number }}/release-binary) |
+
+            #### 📝 Changelog
+            ${{ github.event.pull_request.body }}
+            </details>
+
+            <details>
+            <summary>🇪🇸 Español</summary>
+
+            ### 🚀 Versión Alpha publicada automáticamente
+
+            |  |  |
+            |---|---|
+            | 🔗 **PR** | [${{ github.event.pull_request.html_url }}](${{ github.event.pull_request.html_url }}) |
+            | 👤 **Autor** | ${{ github.event.pull_request.user.login }} |
+            | 🤝 **Fusionado por** | ${{ github.actor }} |
+            | 📦 **Enlace de descarga** | [artifact](${{ github.server_url }}/${{ github.repository }}/releases/download/alpha-${{ github.run_number }}/release-binary) |
+
+            #### 📝 Registro de cambios
+            ${{ github.event.pull_request.body }}
+            </details>
+
+            <details>
+            <summary>🇷🇺 Русский</summary>
+
+            ### 🚀 Автоматически опубликован альфа-релиз
+
+            |  |  |
+            |---|---|
+            | 🔗 **PR** | [${{ github.event.pull_request.html_url }}](${{ github.event.pull_request.html_url }}) |
+            | 👤 **Автор** | ${{ github.event.pull_request.user.login }} |
+            | 🤝 **Слил** | ${{ github.actor }} |
+            | 📦 **Ссылка для скачивания** | [artifact](${{ github.server_url }}/${{ github.repository }}/releases/download/alpha-${{ github.run_number }}/release-binary) |
+
+            #### 📝 Изменения
+            ${{ github.event.pull_request.body }}
+            </details>
+
+            <details>
+            <summary>🇯🇵 日本語</summary>
+
+            ### 🚀 Alphaリリースが自動公開されました
+
+            |  |  |
+            |---|---|
+            | 🔗 **PR** | [${{ github.event.pull_request.html_url }}](${{ github.event.pull_request.html_url }}) |
+            | 👤 **作成者** | ${{ github.event.pull_request.user.login }} |
+            | 🤝 **マージ者** | ${{ github.actor }} |
+            | 📦 **ダウンロードリンク** | [artifact](${{ github.server_url }}/${{ github.repository }}/releases/download/alpha-${{ github.run_number }}/release-binary) |
+
+            #### 📝 変更内容
+            ${{ github.event.pull_request.body }}
+            </details>
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/release/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
