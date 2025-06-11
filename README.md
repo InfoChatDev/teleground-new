@@ -8,4 +8,4 @@ new version of https://github.com/InfoChatDev/teleground ,based with rust langua
 
 
 
-![](https://www.star-history.com/#InfoChatDev/teleground-new&Date)
+<iframe style="width:100%;height:auto;min-width:600px;min-height:400px;" src="https://www.star-history.com/embed?secret=#InfoChatDev/teleground-new&Date" frameBorder="0"></iframe>
