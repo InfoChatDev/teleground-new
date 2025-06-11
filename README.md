@@ -4,8 +4,6 @@ https://github.com/InfoChatDev/teleground 的新版，基于rust
 new version of https://github.com/InfoChatDev/teleground ,based with rust language
 
 
+## Star History
 
-
-
-
-<iframe style="width:100%;height:auto;min-width:600px;min-height:400px;" src="https://www.star-history.com/embed?secret=#InfoChatDev/teleground-new&Date" frameBorder="0"></iframe>
+[![Star History Chart](https://api.star-history.com/svg?repos=InfoChatDev/teleground-new&type=Date)](https://www.star-history.com/#InfoChatDev/teleground-new&Date)
