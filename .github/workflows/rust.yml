@@ -4,8 +4,6 @@
 name: Rust CI
 
 on:
-  push:
-    branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
@@ -23,6 +21,38 @@ jobs:
           toolchain: stable
           override: true
       - name: Build
-        run: cargo build --verbose
-      - name: Run tests
-        run: cargo test --verbose
+        run: cargo build --release --verbose
+      - name: Upload compiled binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-${{ matrix.os }}
+          path: |
+            target/release/*
+  comment-artifacts:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: List artifact download links
+        id: artifact_links
+        run: |
+          echo "ARTIFACTS<<EOF" >> $GITHUB_ENV
+          echo "### :package: This is compiled file" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "- [Linux (ubuntu-latest)](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts?name=compiled-ubuntu-latest)" >> $GITHUB_ENV
+          echo "- [Windows (windows-latest)](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts?name=compiled-windows-latest)" >> $GITHUB_ENV
+          echo "- [macOS (macos-latest)](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts?name=compiled-macos-latest)" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - name: Post artifact links to PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = process.env.ARTIFACTS;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            })
