@@ -54,11 +54,22 @@ fn index() ->Template{
     Template::render("index", context! {})
 }
 
+#[get("/login")]
+fn user_login() -> Template {
+    Template::render("login", context! {})
+}
+
+#[get("/register")]
+fn user_register() -> Template {
+    Template::render("r egister", context! {})
+}
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .manage(channel::<Message>(1024).0)
         .mount("/", routes![post, events, chat, index])
+        .mount("/user", routes![user_login, user_register])
         .mount("/static", FileServer::from(relative!("static")))
         .attach(Template::fairing())
 }

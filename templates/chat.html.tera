@@ -1,7 +1,60 @@
 {% extends "base" %}
 
 {% block title %}Rocket Rooms{% endblock %}
+{% block head%}
+<style>
+    form#new-message {
+    bottom: 0;
+    position: sticky;
+    flex: 0 0 auto;
+    width: 100%;
+    }
 
+    form {
+    display: flex;
+    border-top: 2px solid #242424;
+    }
+
+    form {
+    height: 40px;
+    background: var(--fg-light);
+    color: var(--bg-dark);
+    }
+
+    input {
+        padding: 0 10px;
+    }
+
+    input:focus {
+        outline: 0;
+        filter: brightness(1.05);
+    }
+
+    input#username {
+        text-align: right;
+        flex: 1 25%;
+        width: 25%;
+        border-right: 1px solid #303030;
+    }
+
+    input#message {
+        flex: 10 100%;
+    }
+
+    form button {
+        padding: 0 10px;
+    }
+
+    #new-room input:focus,
+
+    #new-room input {
+        flex: 8 80%;
+        width: 20%;
+        background-color: var(--callout-dark);
+        color: #fff;
+    }
+</style>
+{% endblock %}
 {% block content %}
     <main>
       <div id="sidebar">

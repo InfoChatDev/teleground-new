@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/static/icon.ico">
     <title>Teleground</title>
-    <!-- <link rel="stylesheet" href="/static/pico.min.css"> -->
-    <link rel="stylesheet" href="/static/reset.css">
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="/script.js" charset="utf-8" defer></script>
+    <link rel="stylesheet" href="/static/css/pico.grey.min.css">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/script.js" charset="utf-8" defer></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -18,6 +18,8 @@
       </ul>
       <ul>
         <li><a href="/chat">Chat Page</a></li>
+        <li><a href="/user/login">Login</a></li>
+        <li><a href="/user/register">Register</a></li>
       </ul>
     </nav>
     {% block content %}{% endblock %}

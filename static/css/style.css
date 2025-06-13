@@ -50,11 +50,11 @@ nav li a {
     font-weight: bold;
     padding: 5px 10px;
     transition: background 0.2s;
-    display: inline-block; /* 确保元素支持背景颜色 */
+    display: inline-block;
 }
 
 nav li a:hover {
-    background-color: var(--bg-light); /* 使用浅色背景替代深色 */
+    background-color: var(--bg-light);
     border-radius: 6px;
 }
 
@@ -63,8 +63,6 @@ main {
     display: flex;
     overflow: hidden;
 }
-
-/* 以下保留你原来的 main 样式 */
 
 #sidebar {
     flex: 3 30%;
@@ -125,65 +123,16 @@ main {
     color: var(--callout);
 }
 
-form#new-message {
-    bottom: 0;
-    position: sticky;
-    flex: 0 0 auto;
-    width: 100%;
-}
-
-form {
-    display: flex;
-    border-top: 2px solid #242424;
-}
-
-form * {
-    height: 40px;
-    background: var(--fg-light);
-    color: var(--bg-dark);
-}
-
-input {
-    padding: 0 10px;
-}
-
-input:focus {
-    outline: 0;
-    filter: brightness(1.05);
-}
-
-input#username {
-    text-align: right;
-    flex: 1 25%;
-    width: 25%;
-    border-right: 1px solid #303030;
-}
-
-input#message {
-    flex: 10 100%;
-}
-
-form button {
-    padding: 0 10px;
-}
-
 #sidebar #new-room {
     display: flex;
     flex: 0 0 auto;
     flex-direction: row;
 }
 
-#new-room input:focus,
 #new-room button:hover {
     filter: brightness(1.2);
 }
 
-#new-room input {
-    flex: 8 80%;
-    width: 20%;
-    background-color: var(--callout-dark);
-    color: #fff;
-}
 
 #new-room button {
     flex: 2 20%;

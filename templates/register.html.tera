@@ -1,0 +1,55 @@
+{% extends "base" %}
+
+{% block title %}Register Page{% endblock %}
+
+{% block content %}
+<center>
+<div class="container">
+    <h1><strong><ins>Register Page</ins></strong></h1>
+    <div class="grid">
+        <div></div>
+        <div>
+            <form>
+            <fieldset>
+                <label>
+                    Email
+                    <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="Email"
+                            autocomplete="email"
+                    />
+                </label>
+                <label>
+                    Password
+                    <input
+                            type="password"
+                            name="password"
+                            required
+                            placeholder="Your password"
+                    />
+                </label>
+                <label>
+                    Repeat Password
+                    <input
+                            type="password"
+                            name="repeat-password"
+                            required
+                            placeholder="type your password again"
+                    />
+                </label>
+            </fieldset>
+
+            <input
+                type="submit"
+                value="Login"
+            />
+            </form>
+        </div>
+        <div></div>
+
+    </div>
+</div>
+</center>
+{% endblock %}

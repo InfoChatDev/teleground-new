@@ -1,0 +1,46 @@
+{% extends "base" %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<center>
+<div class="container">
+    <h1><strong><ins>Login Page</ins></strong></h1>
+    <div class="grid">
+        <div></div>
+        <div>
+            <form>
+            <fieldset>
+                <label>
+                    Email
+                    <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="Email"
+                            autocomplete="email"
+                    />
+                </label>
+                <label>
+                    Password
+                    <input
+                            type="password"
+                            name="password"
+                            required
+                            placeholder="Your password"
+                    />
+                </label>
+            </fieldset>
+
+            <input
+                type="submit"
+                value="Login"
+            />
+            </form>
+        </div>
+        <div></div>
+
+    </div>
+</div>
+</center>
+{% endblock %}
