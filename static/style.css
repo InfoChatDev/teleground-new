@@ -54,7 +54,7 @@ nav li a {
 }
 
 nav li a:hover {
-    background-color: var(--callout-dark);
+    background-color: var(--bg-light); /* 使用浅色背景替代深色 */
     border-radius: 6px;
 }
 
