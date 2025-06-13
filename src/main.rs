@@ -8,6 +8,9 @@ use rocket::tokio::select;
 use rocket::FromForm;
 use rocket::launch;
 use rocket_dyn_templates::{Template, context};
+use rocket::response::Redirect;
+use rocket::uri;
+use std::fs;
 
 #[derive(Debug, Clone, FromForm, Serialize, Deserialize)]
 #[serde(crate = "rocket::serde")]
@@ -15,6 +18,19 @@ struct Message {
     pub room: String,
     pub username: String,
     pub message: String,
+}
+
+#[derive(Debug, FromForm)]
+struct User {
+    pub username: String,
+    pub password: String,
+}
+
+#[derive(Debug, FromForm)]
+struct User_Register {
+    pub username: String,
+    pub password: String,
+    pub repeat_password: String,
 }
 
 #[get("/events")]
@@ -50,13 +66,25 @@ fn chat() -> Template {
 }
 
 #[get("/")]
-fn index() ->Template{
+fn index() -> Template {
     Template::render("index", context! {})
 }
 
 #[get("/login")]
 fn user_login() -> Template {
     Template::render("login", context! {})
+}
+
+#[post("/login_receive", data = "<form>")]
+fn user_login_receive(form: Form<User>) -> Redirect {
+    let userame = form.username.clone();
+    let password = form.password.clone();
+    let path = "../user/"+username+".json";
+    let contents = fs::read_to_string(path).expect("Error");
+    if contents == "Error"{
+        
+    }
+    Redirect::to(uri!(user_login))
 }
 
 #[get("/register")]
@@ -69,7 +97,7 @@ fn rocket() -> _ {
     rocket::build()
         .manage(channel::<Message>(1024).0)
         .mount("/", routes![post, events, chat, index])
-        .mount("/user", routes![user_login, user_register])
+        .mount("/user", routes![user_login, user_register, user_login_receive])
         .mount("/static", FileServer::from(relative!("static")))
         .attach(Template::fairing())
 }

@@ -34,7 +34,7 @@
                     Repeat Password
                     <input
                             type="password"
-                            name="repeat-password"
+                            name="repeat_password"
                             required
                             placeholder="type your password again"
                     />
