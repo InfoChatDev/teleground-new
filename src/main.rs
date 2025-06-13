@@ -44,16 +44,21 @@ fn post(form: Form<Message>, queue: &State<Sender<Message>>) {
     let _ = queue.send(msg);
 }
 
-#[get("/")]
-fn index() -> Template {
+#[get("/chat")]
+fn chat() -> Template {
     Template::render("chat", context! {})
+}
+
+#[get("/")]
+fn index() ->Template{
+    Template::render("index", context! {})
 }
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .manage(channel::<Message>(1024).0)
-        .mount("/", routes![post, events, index])
+        .mount("/", routes![post, events, chat, index])
         .mount("/static", FileServer::from(relative!("static")))
         .attach(Template::fairing())
 }

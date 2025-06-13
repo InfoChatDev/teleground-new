@@ -1,0 +1,7 @@
+{% extends "base" %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block content %}
+
+{% endblock %}

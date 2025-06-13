@@ -12,6 +12,14 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <nav>
+      <ul>
+        <li><a href="/"><img src="/static/ico.png"></a></li>
+      </ul>
+      <ul>
+        <li><a href="/chat">Chat Page</a></li>
+      </ul>
+    </nav>
     {% block content %}{% endblock %}
 </body>
 </html>
