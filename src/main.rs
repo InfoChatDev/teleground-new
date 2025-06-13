@@ -61,7 +61,7 @@ fn user_login() -> Template {
 
 #[get("/register")]
 fn user_register() -> Template {
-    Template::render("r egister", context! {})
+    Template::render("register", context! {})
 }
 
 #[launch]
