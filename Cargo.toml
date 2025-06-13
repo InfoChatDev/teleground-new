@@ -1,5 +1,5 @@
 [package]
-name = "chat"
+name = "teleground"
 version = "0.0.0"
 edition = "2021"
 publish = false
@@ -11,3 +11,9 @@ tera = "1.19.1"
 
 [dev-dependencies]
 rand = "0.8"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3

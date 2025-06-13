@@ -1,32 +1,70 @@
 :root {
-  --bg-dark: #242423;
-  --bg-light: #333533;
-  --fg-light: #E8EDDF;
-  --callout: rgb(255, 255, 102);
-  --callout-dark: #101010;
+    --bg-dark: #242423;
+    --bg-light: #333533;
+    --fg-light: #E8EDDF;
+    --callout: rgb(255, 255, 102);
+    --callout-dark: #101010;
 }
 
 * {
     font-size: 14px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body, main {
+html, body {
+    height: 100%;
     background-color: var(--bg-dark);
     color: #fff;
     font-family: "Inter", Arial, Helvetica, sans-serif, "Noto Color Emoji";
     font-weight: 400;
-    text-shadow: rgb(77, 81, 86) 0px 0px 0px;
-    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    height: 50px;
+    background-color: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav li a {
+    color: var(--fg-light);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background 0.2s;
+    display: inline-block; /* 确保元素支持背景颜色 */
+}
+
+nav li a:hover {
+    background-color: var(--callout-dark);
+    border-radius: 6px;
 }
 
 main {
+    flex: 1;
     display: flex;
+    overflow: hidden;
 }
 
-button:hover:not(.active) {
-    filter: brightness(1.15);
-    cursor: pointer;
-}
+/* 以下保留你原来的 main 样式 */
 
 #sidebar {
     flex: 3 30%;
@@ -66,6 +104,11 @@ button:hover:not(.active) {
     flex-direction: column;
 }
 
+#messages {
+    padding: 10px 20px;
+    flex: 1;
+}
+
 .message {
     display: flex;
     flex-direction: column;
@@ -80,11 +123,6 @@ button:hover:not(.active) {
     font-weight: bold;
     padding-bottom: 5px;
     color: var(--callout);
-}
-
-#messages {
-    padding: 10px 20px;
-    flex: 1;
 }
 
 form#new-message {
@@ -135,7 +173,8 @@ form button {
     flex-direction: row;
 }
 
-#new-room input:focus, #new-room button:hover {
+#new-room input:focus,
+#new-room button:hover {
     filter: brightness(1.2);
 }
 
@@ -159,7 +198,7 @@ form button {
 }
 
 #status.pending::before {
-  content: "status: connected";
+    content: "status: connected";
 }
 
 #status.pending {
@@ -168,7 +207,7 @@ form button {
 }
 
 #status.connected::before {
-  content: "status: connected";
+    content: "status: connected";
 }
 
 #status.connected {
@@ -177,7 +216,7 @@ form button {
 }
 
 #status.reconnecting::before {
-  content: "status: reconnecting";
+    content: "status: reconnecting";
 }
 
 #status.reconnecting {
