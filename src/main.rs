@@ -7,6 +7,7 @@ use rocket::tokio::sync::broadcast::{channel, Sender, error::RecvError};
 use rocket::tokio::select;
 use rocket::FromForm;
 use rocket::launch;
+use rocket_dyn_templates::{Template, context};
 
 #[derive(Debug, Clone, FromForm, Serialize, Deserialize)]
 #[serde(crate = "rocket::serde")]
@@ -43,10 +44,16 @@ fn post(form: Form<Message>, queue: &State<Sender<Message>>) {
     let _ = queue.send(msg);
 }
 
+#[get("/")]
+fn index() -> Template {
+    Template::render("chat", context! {})
+}
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .manage(channel::<Message>(1024).0)
-        .mount("/", routes![post, events])
-        .mount("/", FileServer::new(relative!("static"), rocket::fs::Options::Index))
+        .mount("/", routes![post, events, index])
+        .mount("/static", FileServer::from(relative!("static")))
+        .attach(Template::fairing())
 }
